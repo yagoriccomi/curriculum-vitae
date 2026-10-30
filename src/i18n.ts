@@ -189,4 +189,4 @@ export const links = {
   linkedin: 'https://br.linkedin.com/in/yago-riccomi-silveira-8b02a7224',
 }
 
-export const langFromPath = (path: string): Lang => (/\/en\/?$/.test(path) ? 'en' : 'pt')
+export const langFromPath = (path: string): Lang => (/\/en(\/(index\.html)?)?$/.test(path) ? 'en' : 'pt')

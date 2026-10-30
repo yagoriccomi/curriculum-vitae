@@ -116,7 +116,7 @@ h3 { font-family: var(--serif); font-size: 1.5rem; margin: 0 0 0.5rem; }
   .hero .lead { animation-delay: 0.25s; }
   .hero .cta { animation-delay: 0.4s; }
   .hero .plus { display: inline-block; animation: spin 1.2s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-  .caret { animation: blink 1s steps(1) infinite; }
+  .caret { animation: blink 1s steps(1) 6; }
 
   @supports (animation-timeline: view()) {
     .card, .timeline li, h2 {
@@ -131,3 +131,4 @@ h3 { font-family: var(--serif); font-size: 1.5rem; margin: 0 0 0.5rem; }
 @keyframes rise { from { opacity: 0; transform: translateY(1.5rem); } }
 @keyframes spin { from { opacity: 0; transform: rotate(-180deg) scale(0.3); } }
 @keyframes blink { 50% { opacity: 0; } }
+@media print { *, *::before, *::after { animation: none !important; } }

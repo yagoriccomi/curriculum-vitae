@@ -16,6 +16,9 @@ describe('i18n', () => {
     expect(langFromPath('/en/')).toBe('en')
     expect(langFromPath('/curriculum-vitae/en/')).toBe('en')
     expect(langFromPath('/curriculum-vitae/')).toBe('pt')
+    expect(langFromPath('/en/index.html')).toBe('en')
+    expect(langFromPath('/en')).toBe('en')
+    expect(langFromPath('/index.html')).toBe('pt')
   })
 })
 

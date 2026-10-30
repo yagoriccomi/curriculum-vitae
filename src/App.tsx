@@ -18,7 +18,7 @@ export function App({ lang }: { lang: Lang }) {
           <a href="#formacao">{t.nav.education}</a>
           <a href="#contato">{t.nav.contact}</a>
         </nav>
-        <a className="lang" href={other} hrefLang={lang === 'pt' ? 'en' : 'pt-BR'} aria-label={`${t.switchShort}: ${t.switchLabel}`}>
+        <a className="lang" href={other} hrefLang={lang === 'pt' ? 'en' : 'pt-BR'} lang={lang === 'pt' ? 'en' : 'pt-BR'} aria-label={`${t.switchShort}: ${t.switchLabel}`}>
           {t.switchShort}
         </a>
       </header>
