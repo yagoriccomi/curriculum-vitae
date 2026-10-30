@@ -1,0 +1,61 @@
+name: CI e deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      update_snapshots:
+        description: Regerar baselines visuais
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  # ponytail: trocar para '/' e https://www.yagoriccomi.com.br quando o ticket 009 (DNS) fechar.
+  BASE_PATH: /curriculum-vitae/
+  SITE_URL: https://yagoriccomi.github.io/curriculum-vitae
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.64.1-noble
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      # Sem baseline ainda, 'missing' grava a primeira e passa; o artefato vai para o repo depois.
+      - run: npx playwright test --update-snapshots=${{ inputs.update_snapshots && 'all' || 'missing' }}
+        env: { HOME: /root }
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: playwright
+          path: |
+            e2e/__screenshots__/
+            playwright-report/
+            test-results/
+      - uses: actions/upload-pages-artifact@v5.0.0
+        with: { path: dist }
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.d.outputs.page_url }}
+    concurrency: { group: pages, cancel-in-progress: false }
+    steps:
+      - uses: actions/configure-pages@v6.0.0
+      - id: d
+        uses: actions/deploy-pages@v5.0.1
