@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="dark" />
+<title>Modelos de identidade visual — ticket 001</title>
+<style>
+@font-face { font-family: Orbitron; src: url(fonts/orbitron-latin-900-normal.woff2) format('woff2'); font-weight: 900; }
+@font-face { font-family: Archivo Black; src: url(fonts/archivo-black-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: Space Grotesk; src: url(fonts/space-grotesk-latin-400-normal.woff2) format('woff2'); font-weight: 400; }
+@font-face { font-family: Space Grotesk; src: url(fonts/space-grotesk-latin-700-normal.woff2) format('woff2'); font-weight: 700; }
+@font-face { font-family: Plex Mono; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: Fraunces; src: url(fonts/fraunces-latin-wght-normal.woff2) format('woff2'); font-weight: 100 900; }
+@font-face { font-family: Fraunces; src: url(fonts/fraunces-latin-wght-italic.woff2) format('woff2'); font-weight: 100 900; font-style: italic; }
+@font-face { font-family: JetBrains Mono; src: url(fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2'); font-weight: 400; }
+@font-face { font-family: JetBrains Mono; src: url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2'); font-weight: 700; }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: #000; color: #eee; font: 16px/1.5 'Space Grotesk', system-ui, sans-serif; }
+.index { position: sticky; top: 0; z-index: 9; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; padding: .75rem 1.25rem; background: #111; border-bottom: 1px solid #333; font-size: .9rem; }
+.index a { color: #fff; }
+.index strong { margin-inline-end: auto; }
+.tag { position: absolute; top: 1rem; right: 1rem; font: 700 .75rem/1 'JetBrains Mono', monospace; padding: .4rem .6rem; background: #fff; color: #000; letter-spacing: .05em; }
+section.hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem clamp(1.25rem, 6vw, 5rem); overflow: hidden; }
+h1 { margin: 0; }
+.cta { display: inline-block; margin-top: 2rem; text-decoration: none; }
+
+/* 1. Brutalista neon */
+.b { background: #0a0a0a; color: #f2f2f2; font-family: 'Archivo Black', sans-serif; }
+.b .k { font: 400 .9rem 'Plex Mono', monospace; color: #ff2bd6; text-transform: uppercase; }
+.b h1 { font-size: clamp(3.5rem, 15vw, 12rem); line-height: .85; text-transform: uppercase; letter-spacing: -.04em; }
+.b h1 .p { color: #0a0a0a; -webkit-text-stroke: 3px #39ff14; }
+.b h1 .n { color: #39ff14; text-shadow: 0 0 24px #39ff1488; }
+.b .l { font: 400 1.15rem/1.5 'Plex Mono', monospace; max-width: 34rem; border: 3px solid #f2f2f2; padding: 1rem; margin-top: 2rem; background: #0a0a0a; }
+.b .cta { background: #ff2bd6; color: #0a0a0a; padding: 1rem 1.5rem; font-size: 1.2rem; border: 3px solid #f2f2f2; box-shadow: 8px 8px 0 #39ff14; }
+.b::after { content: '§§§§§§§§'; position: absolute; right: -2rem; bottom: -3rem; font-size: 14rem; color: #ffffff08; line-height: 1; }
+
+/* 2. Editorial jurídico */
+.e { background: #14110f; color: #efe6d6; font-family: Fraunces, Georgia, serif; }
+.e .rule { border-top: 1px solid #efe6d644; border-bottom: 1px solid #efe6d644; padding: .4rem 0; display: flex; justify-content: space-between; font: .8rem 'JetBrains Mono', monospace; color: #c9a86a; text-transform: uppercase; letter-spacing: .15em; max-width: 60rem; }
+.e h1 { font-size: clamp(3.5rem, 12vw, 9rem); font-weight: 300; line-height: .95; margin: 2rem 0; }
+.e h1 em { font-weight: 800; color: #c9a86a; }
+.e h1 small { display: block; font-size: .35em; font-style: italic; font-weight: 400; color: #efe6d6aa; }
+.e .l { columns: 2 16rem; column-gap: 2.5rem; max-width: 46rem; font-size: 1.1rem; }
+.e .l::first-letter { float: left; font-size: 4rem; line-height: .8; padding: .3rem .5rem 0 0; color: #c9a86a; font-weight: 800; }
+.e .cta { color: #c9a86a; font: 700 .95rem 'JetBrains Mono', monospace; border-bottom: 1px solid; padding-bottom: .2rem; }
+
+/* 3. Retrô-futurista */
+.r { background: radial-gradient(ellipse at 50% 120%, #ff3d8155, transparent 60%), linear-gradient(#0b0221, #1a0533 70%, #2b0a3d); color: #ffe9f7; text-align: center; align-items: center; }
+.r::before { content: ''; position: absolute; inset: 55% -50% -10%; background: repeating-linear-gradient(90deg, #ff3d8166 0 2px, transparent 2px 60px), repeating-linear-gradient(0deg, #ff3d8166 0 2px, transparent 2px 40px); transform: perspective(300px) rotateX(60deg); }
+.r .sun { width: min(22rem, 60vw); aspect-ratio: 1; border-radius: 50%; background: linear-gradient(#ffd23f, #ff3d81 70%); -webkit-mask: repeating-linear-gradient(#000 0 14px, transparent 14px 20px); mask: linear-gradient(#000 50%, transparent 50%), repeating-linear-gradient(#000 0 14px, transparent 14px 20px); position: absolute; top: 12%; opacity: .8; }
+.r > * { position: relative; }
+.r .k { font: .9rem 'JetBrains Mono', monospace; color: #3df5ff; letter-spacing: .3em; }
+.r h1 { font-family: Orbitron, sans-serif; font-weight: 900; font-size: clamp(2.8rem, 10vw, 7.5rem); line-height: 1; background: linear-gradient(#3df5ff, #fff 50%, #ff3d81 52%, #ffd23f); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 18px #ff3d8188); margin: 1rem 0; }
+.r .l { max-width: 32rem; font-size: 1.15rem; }
+.r .cta { color: #0b0221; background: #3df5ff; padding: .9rem 1.6rem; border-radius: 999px; font: 700 1rem 'JetBrains Mono', monospace; box-shadow: 0 0 30px #3df5ff99; }
+
+/* 4. Gráfico / geométrico */
+.g { background: #101418; color: #f4f4f0; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; }
+.g .k { font: 700 .85rem 'Space Grotesk'; color: #ffb400; letter-spacing: .2em; text-transform: uppercase; }
+.g h1 { font: 700 clamp(3.5rem, 10vw, 8rem)/.9 'Space Grotesk', sans-serif; letter-spacing: -.05em; margin: 1rem 0; }
+.g h1 span { color: #ffb400; }
+.g .l { max-width: 30rem; font-size: 1.15rem; color: #c7cbd1; }
+.g .cta { color: #101418; background: #f4f4f0; padding: 1rem 1.5rem; font-weight: 700; }
+.g .art { position: relative; aspect-ratio: 1; max-width: 30rem; width: 100%; justify-self: center; }
+.g .art i { position: absolute; display: block; }
+.g .art .c1 { inset: 0 30% 30% 0; border-radius: 50%; background: #ffb400; }
+.g .art .s1 { inset: 30% 0 0 30%; background: #2f6bff; mix-blend-mode: screen; }
+.g .art .t1 { inset: 10% 10% auto auto; width: 0; height: 0; border-left: 5rem solid transparent; border-bottom: 8rem solid #f4f4f0; }
+.g .art .br { inset: auto 0 0 0; height: 4px; background: #f4f4f0; }
+.g .art .sym { inset: 38% auto auto 38%; font: 700 7rem/1 'Space Grotesk'; color: #101418; }
+@media (max-width: 50rem) { .g { grid-template-columns: 1fr; } .g .art { max-width: 16rem; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 { animation: in .9s cubic-bezier(.2,.7,.2,1) both; }
+  .b h1 .n { animation: flick 3s 1s 3; }
+  .r .sun { animation: rise 2s ease-out both; }
+  .g .art .c1 { animation: in 1s .2s both; } .g .art .s1 { animation: in 1s .4s both; } .g .art .t1 { animation: in 1s .6s both; }
+}
+@keyframes in { from { opacity: 0; transform: translateY(2rem); } }
+@keyframes flick { 0%, 19%, 21%, 60%, 62%, 100% { opacity: 1; } 20%, 61% { opacity: .2; } }
+@keyframes rise { from { transform: translateY(40%); opacity: 0; } }
+</style>
+</head>
+<body>
+<nav class="index" aria-label="Modelos">
+  <strong>4 modelos da abertura (ticket 001). Qual é o seu? Pode misturar.</strong>
+  <a href="#brutalista">1 Brutalista neon</a>
+  <a href="#editorial">2 Editorial jurídico</a>
+  <a href="#retro">3 Retrô-futurista</a>
+  <a href="#geometrico">4 Geométrico</a>
+  <a href="../">Site atual</a>
+</nav>
+
+<section id="brutalista" class="hero b" aria-labelledby="t1">
+  <span class="tag">1 · BRUTALISTA NEON</span>
+  <p class="k">// yago riccomi silveira — rio claro/sp</p>
+  <h1 id="t1"><span class="n">Código</span><br /><span class="p">+ Direito</span></h1>
+  <p class="l">Escrevo software que funciona e estudo as leis que dizem o que ele pode fazer. Às vezes, nessa ordem.</p>
+  <a class="cta" href="#brutalista">VER OS AUTOS →</a>
+</section>
+
+<section id="editorial" class="hero e" aria-labelledby="t2">
+  <span class="tag">2 · EDITORIAL JURÍDICO</span>
+  <div class="rule"><span>Vol. I — Portfólio</span><span>Rio Claro, SP</span><span>Ed. 2026</span></div>
+  <h1 id="t2">Código <em>&amp;</em> Direito<small>Dos autos de Yago Riccomi Silveira</small></h1>
+  <p class="l">Escrevo software que funciona e estudo as leis que dizem o que ele pode fazer. Às vezes, nessa ordem. Técnico em sistemas, estudante de Direito no 2º ano, e convicto de que contrato bem lido evita bug em produção.</p>
+  <a class="cta" href="#editorial">§ Ler os autos</a>
+</section>
+
+<section id="retro" class="hero r" aria-labelledby="t3">
+  <span class="tag">3 · RETRÔ-FUTURISTA</span>
+  <div class="sun" aria-hidden="true"></div>
+  <p class="k">INSERT COIN · PLAYER 1</p>
+  <h1 id="t3">CÓDIGO<br />+ DIREITO</h1>
+  <p class="l">Escrevo software que funciona e estudo as leis que dizem o que ele pode fazer. Às vezes, nessa ordem.</p>
+  <a class="cta" href="#retro">▶ START</a>
+</section>
+
+<section id="geometrico" class="hero g" aria-labelledby="t4">
+  <span class="tag">4 · GRÁFICO / GEOMÉTRICO</span>
+  <div>
+    <p class="k">Yago Riccomi Silveira</p>
+    <h1 id="t4">Código<span>+</span><br />Direito</h1>
+    <p class="l">Escrevo software que funciona e estudo as leis que dizem o que ele pode fazer. Às vezes, nessa ordem.</p>
+    <a class="cta" href="#geometrico">Ver projetos</a>
+  </div>
+  <div class="art" aria-hidden="true"><i class="c1"></i><i class="s1"></i><i class="t1"></i><i class="br"></i><i class="sym">§</i></div>
+</section>
+</body>
+</html>
