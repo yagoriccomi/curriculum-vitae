@@ -1,0 +1,133 @@
+@import '@fontsource-variable/fraunces';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/700.css';
+
+/* Premissa P2: editorial jurídico + terminal. Só tema escuro. */
+:root {
+  --bg: #0b0b0d;
+  --surface: #15151a;
+  --line: #2a2a33;
+  --text: #ece8df;
+  --muted: #a3a0ad;
+  --accent: #c6ff3d;
+  --accent-2: #ff6b3d;
+  --serif: 'Fraunces Variable', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --max: 68rem;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 1.0625rem/1.65 var(--mono);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px);
+  background-size: 100% 2.5rem;
+  background-attachment: fixed;
+}
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:hover { color: var(--text); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.skip { position: absolute; left: -999px; top: 0.5rem; background: var(--accent); color: var(--bg); padding: 0.5rem 1rem; z-index: 2; }
+.skip:focus { left: 0.5rem; }
+
+.top {
+  position: sticky; top: 0; z-index: 1;
+  display: flex; gap: 1.5rem; align-items: center;
+  padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.top nav { display: flex; gap: 1.25rem; margin-inline-start: auto; flex-wrap: wrap; }
+.top nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+.top nav a:hover { color: var(--accent); }
+.mark { font-family: var(--serif); font-weight: 800; font-size: 1.3rem; color: var(--text); text-decoration: none; }
+.mark span { color: var(--accent); }
+.lang { border: 1px solid var(--accent); padding: 0.15rem 0.6rem; text-decoration: none; font-weight: 700; }
+@media (max-width: 44rem) { .top nav { display: none; } .lang { margin-inline-start: auto; } }
+
+main, .foot { max-width: var(--max); margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2.5rem); }
+section { padding-block: clamp(3rem, 8vw, 6rem); border-bottom: 1px solid var(--line); }
+
+.hero { min-height: 88vh; display: flex; flex-direction: column; justify-content: center; }
+.kicker { color: var(--accent-2); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
+.hero h1 {
+  font-family: var(--serif); font-weight: 900; line-height: 0.9;
+  font-size: clamp(3.5rem, 13vw, 9.5rem); margin: 0.5rem 0 1.5rem;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.25em;
+}
+.hero .w2 { font-style: italic; font-weight: 400; }
+.hero .plus { color: var(--accent); font-family: var(--mono); font-weight: 700; }
+.lead { max-width: 38rem; color: var(--muted); font-size: 1.15rem; }
+.caret { display: inline-block; width: 0.6em; height: 1.1em; margin-inline-start: 0.2em; background: var(--accent); vertical-align: text-bottom; }
+.cta {
+  align-self: flex-start; margin-top: 2rem; padding: 0.8rem 1.4rem;
+  background: var(--accent); color: var(--bg); font-weight: 700; text-decoration: none;
+  box-shadow: 6px 6px 0 var(--accent-2);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.cta:hover { color: var(--bg); transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--accent-2); }
+
+h2 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.25rem); margin: 0 0 2rem; display: flex; gap: 1rem; align-items: baseline; }
+h2 span { font-family: var(--mono); font-size: 0.9rem; color: var(--accent); }
+h3 { font-family: var(--serif); font-size: 1.5rem; margin: 0 0 0.5rem; }
+.prose { max-width: 42rem; }
+
+.cards { list-style: none; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+.card {
+  background: var(--surface); border: 1px solid var(--line); padding: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.card p { margin: 0; }
+.card > a { margin-top: auto; font-size: 0.9rem; }
+.card-n { color: var(--accent-2); font-size: 0.8rem; }
+.stack { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.stack li { font-size: 0.78rem; border: 1px solid var(--line); padding: 0.1rem 0.5rem; color: var(--muted); }
+
+.timeline { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 2rem 1.5rem; display: grid; gap: 0.15rem; }
+.timeline li::before { content: ''; position: absolute; left: -7px; top: 0.45rem; width: 12px; height: 12px; background: var(--accent); }
+.when { color: var(--accent-2); font-size: 0.85rem; }
+.where { color: var(--muted); }
+
+.degrees { padding-inline-start: 1.2rem; }
+.degrees li { margin-bottom: 0.5rem; }
+.courses { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.courses li { border: 1px solid var(--line); padding: 0.3rem 0.75rem; background: var(--surface); }
+
+.contact { list-style: none; padding: 0; display: grid; gap: 0.6rem; font-size: 1.15rem; }
+.foot { padding-block: 2.5rem; color: var(--muted); font-size: 0.85rem; }
+
+/* Animação só para quem não pediu menos movimento (decisão 003). */
+@media (prefers-reduced-motion: no-preference) {
+  .hero > * { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .hero h1 { animation-delay: 0.1s; }
+  .hero .lead { animation-delay: 0.25s; }
+  .hero .cta { animation-delay: 0.4s; }
+  .hero .plus { display: inline-block; animation: spin 1.2s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .caret { animation: blink 1s steps(1) infinite; }
+
+  @supports (animation-timeline: view()) {
+    .card, .timeline li, h2 {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+@keyframes rise { from { opacity: 0; transform: translateY(1.5rem); } }
+@keyframes spin { from { opacity: 0; transform: rotate(-180deg) scale(0.3); } }
+@keyframes blink { 50% { opacity: 0; } }
