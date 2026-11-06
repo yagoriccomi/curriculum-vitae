@@ -1,4 +1,4 @@
-// Rascunho (premissa P1): textos a revisar no ticket 002/008.
+// Textos na voz "Carta celeste" (escolhida no canvas de refino, R05). Fatos só do currículo.
 export type Lang = 'pt' | 'en'
 
 const pt = {
@@ -10,16 +10,16 @@ const pt = {
   switchLabel: 'Read in English',
   switchShort: 'EN',
   hero: {
-    kicker: '§ 1º — Das partes',
-    title: ['Código', '+', 'Direito'],
-    lead: 'Escrevo software que funciona e estudo as leis que dizem o que ele pode fazer. Às vezes, nessa ordem.',
-    cta: 'Ver os autos (projetos)',
+    kicker: 'Uranographia · Tabula I',
+    title: ['Yago', 'Riccomi'],
+    lead: 'Desenvolvedor de software e estudante de Direito. Construo sites, APIs e apps com React, Node e TypeScript. Uso meus estudos em cibersegurança e LGPD para garantir a proteção dos meus clientes. Este é o meu céu: as estrelas douradas são projetos; as violetas, o caminho até aqui.',
+    cta: 'Ver as estrelas (projetos)',
   },
   about: {
-    heading: 'Sobre',
+    heading: 'Quem traça este mapa',
     body: [
-      'Sou Yago, de Rio Claro/SP. Técnico em Desenvolvimento de Sistemas pela Etec, passei por estágio de TI, freelas de desenvolvimento web e até venda de planos de telefonia (sim, sei negociar prazo).',
-      'Hoje curso o 2º ano de Direito. Parece desvio de rota; é atalho: quem entende de contrato, LGPD e responsabilidade escreve sistemas que não viram processo.',
+      'Sou Yago Riccomi, de Rio Claro/SP. Aprendi a programar no técnico da Etec e, desde então, faço sites, APIs e apps: em estágio, em freelas e nos meus próprios projetos.',
+      'Hoje curso o 2º ano de Direito. Não é mudança de rota: entender contrato, LGPD e responsabilidade me ajuda a escrever sistemas que protegem quem usa.',
     ],
   },
   projects: {
@@ -28,9 +28,9 @@ const pt = {
     repoLabel: 'Repositório',
     items: [
       {
-        name: 'Fodinha online',
+        name: 'Fodinha - cardgame',
         repo: 'jogo-de-cartas',
-        text: 'Jogo de cartas multiplayer no navegador. Salas por código, até 10 jogadores (bots completam a mesa) e servidor autoritativo, porque confiar no cliente é nulidade absoluta.',
+        text: 'Jogo de cartas multiplayer no navegador. Salas por código, até 10 jogadores (bots completam a mesa) e servidor autoritativo: quem valida cada jogada é o servidor, não o navegador.',
         stack: ['React', 'Node', 'Socket.IO', 'TypeScript'],
       },
       {
@@ -40,23 +40,36 @@ const pt = {
         stack: ['React Native', 'Expo', 'Express', 'Next.js', 'Supabase', 'Zod'],
       },
       {
+        name: 'Stream P2P',
+        repo: 'stream-p2p',
+        text: 'Transmissão de tela entre amigos, sem login: voz em tempo real, vídeo com o mesmo atraso para todos, app para Windows e bot do Discord. O servidor só apresenta as pessoas; a mídia vai direto de um para o outro.',
+        stack: ['Node', 'WebRTC', 'WebSocket', 'Tauri 2', 'Discord'],
+      },
+      {
         name: 'Minecraft descentralizado',
         repo: 'docker-minecraft-server',
-        text: 'Servidor de Minecraft que roda na máquina de qualquer amigo. O mapa sincroniza por P2P e há proteção contra dois servidores abertos ao mesmo tempo (o famoso split-brain).',
+        text: 'Servidor de Minecraft que roda na máquina de qualquer amigo. O mapa sincroniza por P2P, com proteção contra dois servidores abertos ao mesmo tempo.',
         stack: ['Docker', 'PowerShell', 'Syncthing', 'Tailscale'],
       },
       {
-        name: 'Automações do dia a dia',
+        name: 'Alexa no Windows',
         repo: 'comandos-em-meu-computador',
-        text: 'A Alexa dispara comandos no meu Windows, e um script reaplica o Vencord sozinho depois de cada update do Discord. Preguiça bem aplicada.',
-        stack: ['JavaScript', 'PowerShell'],
+        text: 'Uma skill da Alexa que dispara comandos CMD e PowerShell no meu Windows: falo, e o PC executa.',
+        stack: ['JavaScript', 'AWS Lambda', 'MQTT', 'PowerShell'],
+      },
+      {
+        name: 'Vencord Auto-Repair',
+        repo: 'vencord-autorepair',
+        text: 'Instala o Vencord e o mantém aplicado: um menu .bat e scripts PowerShell reaplicam tudo sozinhos depois de cada atualização do Discord.',
+        stack: ['PowerShell', 'Batch', 'Pester'],
       },
     ],
   },
   path: {
-    heading: 'Trajetória',
+    heading: 'A rota até aqui',
     items: [
-      { when: '2025 – hoje', what: 'Direito (2º ano)', where: 'Anhanguera' },
+      { when: '08/2026 – hoje', what: 'Programador de sistemas de informação', where: 'SK Company' },
+      { when: '04/2026 – 08/2026', what: 'Assistente administrativo', where: 'JP Soluções Administrativas e Treinamentos' },
       { when: '10/2023 – 07/2024', what: 'Consultor de negócios', where: 'Cronologica Telefonia – Vivo' },
       { when: '10/2022 – 09/2023', what: 'Desenvolvedor web autônomo', where: 'React, Node, PHP, SQL, AWS, Docker' },
       { when: '03/2022 – 09/2022', what: 'Estagiário de TI', where: 'AutoSim Tecnologia' },
@@ -64,7 +77,7 @@ const pt = {
     ],
   },
   education: {
-    heading: 'Formação',
+    heading: 'Onde aprendi',
     degrees: [
       'Bacharelado em Direito — Anhanguera, cursando (2º ano)',
       'Técnico em Desenvolvimento de Sistemas integrado ao Ensino Médio — Etec Prof. Armando Bayeux da Silva, 2019–2021',
@@ -83,8 +96,8 @@ const pt = {
     ],
   },
   contact: {
-    heading: 'Contato',
-    lead: 'Tem vaga, projeto ou dúvida sobre se o seu termo de uso vale alguma coisa? Fala comigo.',
+    heading: 'Para onde a flecha aponta',
+    lead: 'Tem uma vaga, um projeto ou uma ideia que precisa de código e de cuidado jurídico? Escreva. O e-mail é o caminho mais curto.',
     city: 'Rio Claro, SP',
   },
   footer: 'Feito com React, CSS puro e um pouco de cafeína.',
@@ -101,16 +114,16 @@ const en: Dict = {
   switchLabel: 'Ler em português',
   switchShort: 'PT',
   hero: {
-    kicker: '§ 1 — The parties',
-    title: ['Code', '+', 'Law'],
-    lead: 'I write software that works and study the laws that say what it may do. Sometimes in that order.',
-    cta: 'See the case files (projects)',
+    kicker: 'Uranographia · Tabula I',
+    title: ['Yago', 'Riccomi'],
+    lead: 'Software developer and law student. I build websites, APIs and apps with React, Node and TypeScript. I use my studies in cybersecurity and data protection law to keep my clients safe. This is my sky: the gold stars are projects; the violet ones, the road so far.',
+    cta: 'See the stars (projects)',
   },
   about: {
-    heading: 'About',
+    heading: 'Who draws this map',
     body: [
-      "I'm Yago, from Rio Claro, Brazil. Systems development technician from Etec; I've done an IT internship, freelance web development and even sold phone plans (yes, I can negotiate a deadline).",
-      "I'm now in my 2nd year of Law school. Looks like a detour; it's a shortcut: people who understand contracts, privacy law and liability build systems that don't end up in court.",
+      "I'm Yago Riccomi, from Rio Claro, Brazil. I learned to code in Etec's technical program and have been building websites, APIs and apps ever since: as an intern, as a freelancer and in my own projects.",
+      "I'm now in my 2nd year of Law school. It's not a change of course: understanding contracts, privacy law and liability helps me build systems that protect the people who use them.",
     ],
   },
   projects: {
@@ -119,9 +132,9 @@ const en: Dict = {
     repoLabel: 'Repository',
     items: [
       {
-        name: 'Fodinha online',
+        name: 'Fodinha - cardgame',
         repo: 'jogo-de-cartas',
-        text: 'Multiplayer card game in the browser. Rooms by code, up to 10 players (bots fill the table) and an authoritative server, because trusting the client is void from the start.',
+        text: 'Multiplayer card game in the browser. Rooms by code, up to 10 players (bots fill the table) and an authoritative server: every move is validated by the server, not the browser.',
         stack: ['React', 'Node', 'Socket.IO', 'TypeScript'],
       },
       {
@@ -131,23 +144,36 @@ const en: Dict = {
         stack: ['React Native', 'Expo', 'Express', 'Next.js', 'Supabase', 'Zod'],
       },
       {
+        name: 'Stream P2P',
+        repo: 'stream-p2p',
+        text: 'Screen sharing between friends, no login: real-time voice, video with the same delay for everyone, a Windows app and a Discord bot. The server only introduces people; media goes straight from one to another.',
+        stack: ['Node', 'WebRTC', 'WebSocket', 'Tauri 2', 'Discord'],
+      },
+      {
         name: 'Decentralized Minecraft',
         repo: 'docker-minecraft-server',
-        text: "A Minecraft server that runs on any friend's machine. The map syncs peer-to-peer, with protection against two servers running at once (the infamous split-brain).",
+        text: "A Minecraft server that runs on any friend's machine. The map syncs peer-to-peer, with protection against two servers running at once.",
         stack: ['Docker', 'PowerShell', 'Syncthing', 'Tailscale'],
       },
       {
-        name: 'Everyday automations',
+        name: 'Alexa on Windows',
         repo: 'comandos-em-meu-computador',
-        text: 'Alexa runs commands on my Windows PC, and a script reapplies Vencord after every Discord update. Laziness, well applied.',
-        stack: ['JavaScript', 'PowerShell'],
+        text: 'An Alexa skill that runs CMD and PowerShell commands on my Windows PC: I speak, the PC does it.',
+        stack: ['JavaScript', 'AWS Lambda', 'MQTT', 'PowerShell'],
+      },
+      {
+        name: 'Vencord Auto-Repair',
+        repo: 'vencord-autorepair',
+        text: 'Installs Vencord and keeps it applied: a .bat menu and PowerShell scripts reapply everything after every Discord update.',
+        stack: ['PowerShell', 'Batch', 'Pester'],
       },
     ],
   },
   path: {
-    heading: 'Experience',
+    heading: 'The road so far',
     items: [
-      { when: '2025 – now', what: 'Law (2nd year)', where: 'Anhanguera' },
+      { when: '08/2026 – now', what: 'Information systems programmer', where: 'SK Company' },
+      { when: '04/2026 – 08/2026', what: 'Administrative assistant', where: 'JP Soluções Administrativas e Treinamentos' },
       { when: '10/2023 – 07/2024', what: 'Business consultant', where: 'Cronologica Telefonia – Vivo' },
       { when: '10/2022 – 09/2023', what: 'Freelance web developer', where: 'React, Node, PHP, SQL, AWS, Docker' },
       { when: '03/2022 – 09/2022', what: 'IT intern', where: 'AutoSim Tecnologia' },
@@ -155,7 +181,7 @@ const en: Dict = {
     ],
   },
   education: {
-    heading: 'Education',
+    heading: 'Where I learned',
     degrees: [
       'Bachelor of Laws — Anhanguera, in progress (2nd year)',
       'Systems Development technical degree, integrated with high school — Etec Prof. Armando Bayeux da Silva, 2019–2021',
@@ -174,8 +200,8 @@ const en: Dict = {
     ],
   },
   contact: {
-    heading: 'Contact',
-    lead: 'Got a job, a project, or a doubt about whether your terms of service hold up? Talk to me.',
+    heading: 'Where the arrow points',
+    lead: 'Got a job, a project or an idea that needs both code and legal care? Write to me. E-mail is the shortest route.',
     city: 'Rio Claro, Brazil',
   },
   footer: 'Made with React, plain CSS and some caffeine.',
