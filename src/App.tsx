@@ -43,6 +43,13 @@ export function App({ lang }: { lang: Lang }) {
     observer.observe(element.parentElement!.querySelector('.hero')!)
     return () => observer.disconnect()
   }, [])
+  // Desktop overview camera from the approved canvas (F01, 1280×800: scale 1.07 at -44,-52), used only while
+  // every star's hit target stays inside the sky frame. Mobile keeps the fitted camera: F03's scale (.42)
+  // would make neighbouring 44px touch targets overlap.
+  const vw = frame.left + frame.width + 24, vh = frame.top + frame.height + 72
+  const k = Math.min(vw / 1280, vh / 800), cs = 1.07 * k, ctx = vw - 1324 * k, cty = (vh - 800 * k) / 2 - 52 * k
+  const half = Math.max(32 * cs, 22) + 1
+  const canvasFits = !frame.mobile && vw >= 1200 && baseStars.every(s => s.x * cs + ctx - half >= frame.left && s.x * cs + ctx + half <= frame.left + frame.width && s.y * cs + cty - half >= frame.top && s.y * cs + cty + half <= frame.top + frame.height)
   const stars = baseStars.map(s => frame.mobile ? { ...s, ...(s.id === 'g' ? { x: 401 } : s.id === 'e' ? { y: 570 } : s.id === 'f' ? { x: 730, y: 440 } : {}) } : s)
   const mapPoints = [...stars, points[points.length - 1]]
   const sel = stars.find(s => s.id === selected)
@@ -63,16 +70,16 @@ export function App({ lang }: { lang: Lang }) {
   }, [selected])
   // Fit the map bounds, leaving room for unscaled 44px hit targets at every edge.
   const fit = Math.min((frame.width - 48) / (frame.mobile ? 591 : 511), (frame.height - 48) / 650, frame.width / (frame.mobile ? 655 : 575), frame.height / 714)
-  const scale = sel ? (frame.mobile ? 1 : 2.2) : fit
+  const scale = sel ? (frame.mobile ? 1 : 2.2) : canvasFits ? cs : fit
   const sx = sel ? (frame.mobile ? frame.left + frame.width / 2 : frame.left + frame.width * .08) : frame.left + frame.width / 2
   const sy = sel ? (frame.mobile ? 150 : frame.top + frame.height / 2) : frame.top + frame.height / 2
-  const tx = sx - scale * (sel ? sel.x : frame.mobile ? 696.5 : 736.5)
-  const ty = sy - scale * (sel ? sel.y : 441)
+  const tx = !sel && canvasFits ? ctx : sx - scale * (sel ? sel.x : frame.mobile ? 696.5 : 736.5)
+  const ty = !sel && canvasFits ? cty : sy - scale * (sel ? sel.y : 441)
   const style = {
     '--tx': `${tx}px`, '--ty': `${ty}px`, '--scale': scale,
     '--hit-scale': Math.max(1, 44 / (64 * scale)),
     '--sx': `${sx}px`, '--sy': `${sy}px`, '--duration': `${duration}s`,
-    '--fl': `${frame.left}px`, '--ft': `${frame.top}px`, '--fh': `${frame.height}px`,
+    '--fl': `${frame.left}px`, '--frt': `${frame.top}px`, '--fh': `${frame.height}px`,
   } as CSSProperties
   const project = sel && 'project' in sel ? t.projects.items[sel.project] : null
 
