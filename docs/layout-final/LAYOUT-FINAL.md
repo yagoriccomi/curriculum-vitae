@@ -25,8 +25,8 @@ Os scripts que geram as duas telas estão em [`geradores/`](geradores/). Eles s�
 | `--muted` | `#cfc6ee` | texto secundário |
 | `--veil` | `6,4,13` (RGB) | véus e fundos translúcidos: `rgba(var(--veil), a)` |
 | `--bg1` / `--bg0` | `#1a0e42` / `#06040d` | fundo: `radial-gradient(ellipse at 68% 48%, var(--bg1), var(--bg0) 72%)` |
-| `--fd` | Cinzel, peso 600, `letter-spacing: .04em` | nome (h1), títulos da ficha |
-| `--ft` | Cormorant Garamond, itálico | corpo, legenda, nomes de estrela |
+| `--fd` | EB Garamond, peso 500, `letter-spacing: .07em` | nome (h1), títulos da ficha |
+| `--ft` | EB Garamond, itálico | corpo, legenda, nomes de estrela |
 | `--fu` | Sora | rótulos em caixa alta, botões |
 
 ### 1.2 Cena (mesma nos dois layouts)
@@ -78,8 +78,8 @@ Cada item é um `<button class="lgi">` em forma de pílula:
 
 ### 1.5 Textos
 
-- **Topo à esquerda:** `URANOGRAPHIA` (Cinzel 600, `letter-spacing: .26em`, dourado).
-- **Nome:** `YAGO RICCOMI` em Cinzel com gradiente `linear-gradient(100deg, #fff, var(--gold) 38%, var(--vio) 72%, #fff)` recortado no texto.
+- **Topo à esquerda:** `URANOGRAPHIA` (EB Garamond 500, `letter-spacing: .26em`, dourado).
+- **Nome:** `YAGO RICCOMI` em EB Garamond com gradiente `linear-gradient(100deg, #fff, var(--gold) 38%, var(--vio) 72%, #fff)` recortado no texto.
 - **Texto principal** (o mesmo nos dois layouts; vem de `hero.lead` em `src/i18n.ts`):
   > Desenvolvedor de software e estudante de Direito. Construo sites, APIs e apps com React, Node e TypeScript. Uso meus estudos em cibersegurança e LGPD para garantir a proteção dos meus clientes. Este é o meu céu: as estrelas douradas são projetos; as violetas, o caminho até aqui.
 - **Créditos da gravura:** um link para a Polona, em Cormorant itálico 600, cor `--soft`, sublinhado dourado a 60% com `text-underline-offset: 3px` e sombra para leitura sobre a arte.

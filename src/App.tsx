@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { Fragment, useEffect, useRef, useState, type CSSProperties } from 'react'
 import { dict, links, type Lang } from './i18n'
 
 const BASE = import.meta.env.BASE_URL
@@ -17,7 +17,13 @@ const baseStars = [
 const points = [...baseStars, { id: 'h', x: 778, y: 766 }]
 const edges = ['gd', 'dl', 'lf', 'fs', 'st', 'tz', 'ze', 'ed', 'fz', 'ge', 'sp', 'lm', 'eh']
 const apps: Record<string, string> = { e: 'https://game.yagoriccomi.com.br', p: 'https://stream.yagoriccomi.com.br' }
-const polygon = '32,9 33.53,28.3 41.9,22.1 35.7,30.47 55,32 35.7,33.53 41.9,41.9 33.53,35.7 32,55 30.47,35.7 22.1,41.9 28.3,33.53 9,32 28.3,30.47 22.1,22.1 30.47,28.3'
+// Twinkle cycle per star (min, grow, max, shrink), shared by the map star and its legend pill.
+// Pseudo-random from the id, so the prerendered HTML and the client agree.
+const pulse = (id: string) => {
+  const h = [...id].reduce((n, c) => (n * 31 + c.charCodeAt(0)) % 9973, 7)
+  return { '--pulse-dur': `${(3.2 + (h % 21) / 10).toFixed(1)}s`, '--pulse-delay': `-${((h * 7) % 41 / 10).toFixed(1)}s` } as CSSProperties
+}
+const polygon = '32,2.1 33.99,27.19 44.87,19.13 36.81,30.01 61.9,32 36.81,33.99 44.87,44.87 33.99,36.81 32,61.9 30.01,36.81 19.13,44.87 27.19,33.99 2.1,32 27.19,30.01 19.13,19.13 30.01,27.19'
 
 export function App({ lang }: { lang: Lang }) {
   const t = dict[lang]
@@ -93,6 +99,12 @@ export function App({ lang }: { lang: Lang }) {
     }}>
       <div className="starfield" aria-hidden="true">{Array.from({ length: 90 }, (_, i) => <i key={i} style={{ left: `${(i * 37.13) % 100}%`, top: `${(i * 61.7) % 100}%`, animationDelay: `${i % 5}s` }} />)}</div>
       <div className="sky-frame" ref={sky} aria-hidden="true" />
+      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true"><defs>
+        {([['g', 'var(--gold)'], ['v', 'var(--vio)']] as const).map(([k, c]) => <Fragment key={k}>
+          <radialGradient id={`h${k}`}><stop offset="0" style={{ stopColor: c, stopOpacity: .85 }} /><stop offset=".45" style={{ stopColor: c, stopOpacity: .3 }} /><stop offset="1" style={{ stopColor: c, stopOpacity: 0 }} /></radialGradient>
+          <radialGradient id={`r${k}`}><stop offset=".15" stopColor="#fff" /><stop offset=".6" style={{ stopColor: c }} /></radialGradient>
+        </Fragment>)}
+      </defs></svg>
       <div className="sky-clip"><div className="scene">
         <img className="engraving" src={`${BASE}sky/hevelius-sagittarius.png`} width="1014" height="845" alt="" aria-hidden="true" onError={() => setImageFailed(true)} />
         <svg className="constellation" width="1280" height="800" aria-hidden="true">{edges.map(edge => {
@@ -102,8 +114,8 @@ export function App({ lang }: { lang: Lang }) {
         <span className="tiny" style={{ left: 778, top: 766 }} aria-hidden="true" />
         <div role="group" aria-label={pt ? 'Estrelas do mapa' : 'Map stars'}>{stars.map(s => <button key={s.id} type="button" data-star={s.id}
           className={`pstar${'section' in s ? ' sec' : ''}${selected === s.id ? ' on' : ''}${highlight === s.id ? ' hl' : ''}`}
-          style={{ left: s.x, top: s.y }} aria-label={`${pt ? 'Abrir' : 'Open'} ${name(s)}`} aria-controls="star-panel" aria-expanded={selected === s.id} onClick={() => open(s.id)}>
-          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="23" /><polygon points={polygon} /></svg><span className="star-name">{s.greek} {s.star}</span>
+          style={{ left: s.x, top: s.y, ...pulse(s.id) }} aria-label={`${pt ? 'Abrir' : 'Open'} ${name(s)}`} aria-controls="star-panel" aria-expanded={selected === s.id} onClick={() => open(s.id)}>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle className="halo" cx="32" cy="32" r="37.7" /><polygon className="rays" points={polygon} /></svg><span className="star-name">{name(s)}</span>
         </button>)}</div>
       </div></div>
       <div className="comet" aria-hidden="true" />
@@ -114,7 +126,7 @@ export function App({ lang }: { lang: Lang }) {
         <h1>YAGO <span>RICCOMI</span></h1><div className="ornament" aria-hidden="true">◇</div>
         <div className={`lead-wrap${expanded ? ' expanded' : ''}`}><p id="hero-lead" className="lead">{t.hero.lead}</p><button type="button" className="lead-toggle" aria-controls="hero-lead" aria-expanded={expanded} aria-label={pt ? (expanded ? 'Recolher texto' : 'Mostrar o texto completo') : (expanded ? 'Collapse text' : 'Show full text')} onClick={() => setExpanded(!expanded)}><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" /></svg></button></div>
       </div>
-      <nav className="legend overview" inert={!!sel} aria-label={pt ? 'Legenda' : 'Legend'}>{[true, false].map(projects => <div className={projects ? 'lgc' : 'lgc sections'} key={String(projects)}><h2>{projects ? t.nav.projects : pt ? 'O caminho' : 'The journey'}</h2><ul>{stars.filter(s => ('project' in s) === projects).sort((a, b) => name(a).localeCompare(name(b), lang)).map(s => <li key={s.id}><button type="button" className="lgi" onMouseEnter={() => setHighlight(s.id)} onMouseLeave={() => setHighlight(null)} onFocus={() => setHighlight(s.id)} onBlur={() => setHighlight(null)} onClick={() => open(s.id)} aria-controls="star-panel" aria-expanded={selected === s.id}>{name(s)}</button></li>)}</ul></div>)}</nav>
+      <nav className="legend overview" inert={!!sel} aria-label={pt ? 'Legenda' : 'Legend'}>{[true, false].map(projects => <div className={projects ? 'lgc' : 'lgc sections'} key={String(projects)}><h2>{projects ? t.nav.projects : pt ? 'O caminho' : 'The journey'}</h2><ul>{stars.filter(s => ('project' in s) === projects).sort((a, b) => name(a).localeCompare(name(b), lang)).map(s => <li key={s.id}><button type="button" className="lgi" style={pulse(s.id)} onMouseEnter={() => setHighlight(s.id)} onMouseLeave={() => setHighlight(null)} onFocus={() => setHighlight(s.id)} onBlur={() => setHighlight(null)} onClick={() => open(s.id)} aria-controls="star-panel" aria-expanded={selected === s.id}>{name(s)}</button></li>)}</ul></div>)}</nav>
       <a className="credit overview" inert={!!sel} href="https://polona.pl/preview/5ac16003-101f-4ff1-96ad-3bd3709cc48c" target="_blank" rel="noopener noreferrer"><span className="credit-long">{pt ? 'Gravura' : 'Engraving'}: Johannes Hevelius, Uranographia (1690) ↗</span><span className="credit-short">{pt ? 'Gravura' : 'Engraving'}: Hevelius, 1690 ↗</span></a>
       {imageFailed && <p role="status" className="asset-error">{pt ? 'Gravura indisponível. Consulte a obra original nos créditos.' : 'Engraving unavailable. See the original in the credits.'}</p>}
       <div aria-live="polite">{sel && <section id="star-panel" ref={panel} className="panel glass" aria-labelledby="panel-title">
